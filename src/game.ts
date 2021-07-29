@@ -1,7 +1,7 @@
   // NOTE: remember to add &ENABLE_WEB3 to the url when running locally
 import * as EthereumController from "@decentraland/EthereumController"
 
-class Convo implements ISystem {
+class Convo {
 
     initializedState: boolean;
     state: any;
@@ -27,17 +27,18 @@ class Convo implements ISystem {
             this.state.data = json;
             this.cube.addComponentOrReplace(
                 new Transform({
-                    position: new Vector3(1, 1, 0),
+                    position: new Vector3(4, 1, 8),
+                    rotation: Quaternion.Euler(0, 90, 0)
                 })
             );
-            const myText = new TextShape("Hello World!")
-            this.cube.addComponent(myText)
+            const myText = new TextShape(decodeURIComponent(json[0].text));
+            this.cube.addComponent(myText);
             engine.addEntity(this.cube);
         }
         else {
             if (this.state.data[0]['_id'] != json[0]._id){
-                log('New Update found', 'hi');
-                this.cube.getComponent(TextShape).value = json[0].text;
+                log('New Update found', decodeURIComponent(json[0].text));
+                this.cube.getComponent(TextShape).value = decodeURIComponent(json[0].text);
             }
             else {
                 log('nothing to update.');
@@ -73,6 +74,6 @@ const convo = new Convo();
 
 convo.auth();
 
-// setInterval(async ()=>{
-//     game.updateMessages();
-// }, 3000);
+setInterval(async ()=>{
+    convo.updateMessages();
+}, 3000);

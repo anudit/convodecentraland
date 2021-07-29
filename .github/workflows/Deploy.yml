@@ -23,6 +23,8 @@ jobs:
     - name: Install Dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: yarn install
+    - name: Install DCL
+      run: yarn install -g decentraland
     - name: Export Project
       run: yarn export
     - name: Deploy 🚀

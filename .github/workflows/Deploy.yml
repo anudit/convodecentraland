@@ -16,17 +16,6 @@ jobs:
     - uses: actions/setup-node@v2
       with:
         node-version: 16
-    - uses: actions/cache@v2
-      with:
-        path: '**/node_modules'
-        key: ${{ runner.os }}-modules-${{ hashFiles('**/yarn.lock') }}
-    - name: Install Dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: yarn install
-    - name: Install DCL
-      run: yarn global add decentraland
-    - name: Export Project
-      run: yarn export
     - name: Deploy 🚀
       uses: peaceiris/actions-gh-pages@v3
       with:

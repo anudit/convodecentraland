@@ -18,7 +18,7 @@ class Convo {
     }
 
     async updateMessages(){
-        let response = await fetch('https://theconvo.space/api/comments?url=https%3A%2F%2Ftheconvo.space%2F&latestFirst=true&page=0&pageSize=5&apikey=CONVO')
+        let response = await fetch('https://theconvo.space/api/comments?threadId=KIGZUnR4RzXDFheXoOwo&latestFirst=true&page=0&pageSize=5&apikey=CONVO')
         let json = await response.json();
         log('initializedState', this.initializedState);
         if (this.initializedState === false) {
